@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import {
@@ -32,6 +31,8 @@ const NavBar = () => {
   const router = useRouter();
   const session = useSession();
 
+  // console.log('session', session);
+
   const handleLoginClick = async () => {
     if (
       session &&
@@ -41,6 +42,18 @@ const NavBar = () => {
       await router.push("/verificationCheck");
     } else {
       await router.push("/login");
+    }
+  };
+
+  const handleSignUpClick = async () => {
+    if (
+      session &&
+      session.status === "authenticated" &&
+      session?.data?.user?.id
+    ) {
+      await router.push("/verificationCheck");
+    } else {
+      await router.push("/register");
     }
   };
 
@@ -124,14 +137,10 @@ const NavBar = () => {
             </Link>
             <ThemeSwitch />
             <Button color="primary" onClick={handleLoginClick}>
-              {/* <NextLink href={siteConfig.auth.login} passHref> */}
               Login
-              {/* </NextLink> */}
             </Button>
-            <Button color="danger">
-              <NextLink href={siteConfig.auth.register} passHref>
-                Register
-              </NextLink>
+            <Button color="danger" onClick={handleSignUpClick}>
+              Register
             </Button>
           </NavbarItem>
         </NavbarContent>

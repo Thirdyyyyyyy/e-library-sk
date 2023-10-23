@@ -5,6 +5,8 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import Providers from "./providers";
 import Head from "next/head";
+// import { Provider } from "react-redux";
+// import { store } from "../redux-store/store";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -12,14 +14,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Providers>
-        <Head>
-          <title>SK Cannery Site</title>
-          <meta name="description" content="SK Cannery Site App" />
-          <link rel="icon" href="/SKLogo.png" />
-        </Head>
-        <Component {...pageProps} />
-      </Providers>
+      {/* <Provider store={store}> */}
+        <Providers>
+          <Head>
+            <title>SK Cannery Site</title>
+            <meta name="description" content="SK Cannery Site App" />
+            <link rel="icon" href="/SKLogo.png" />
+          </Head>
+          <Component {...pageProps} />
+        </Providers>
+      {/* </Provider> */}
     </SessionProvider>
   );
 };

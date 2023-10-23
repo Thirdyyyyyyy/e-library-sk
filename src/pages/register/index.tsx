@@ -1,15 +1,15 @@
 import type { NextPage } from "next";
 import React from "react";
-import LoginPage from "~/website/login/LoginPage";
 import NavBar from "~/website/navbar/navbar";
+import SignUpPage from "~/website/register/SignUpPage";
 
-const Login: NextPage = () => {
+const Register: NextPage = () => {
   return (
     <>
     <NavBar/>
-      <LoginPage />
+      <SignUpPage />
     </>
   );
 };
 
-export default Login;
+export default Register;

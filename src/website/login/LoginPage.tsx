@@ -3,10 +3,9 @@ import { Card, CardBody } from "@nextui-org/card";
 import Image from "next/image";
 import { Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
-
 import { type LoginData } from "./LoginInterface";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import {
   EyeFilledIcon,
   EyeSlashFilledIcon,
@@ -14,9 +13,25 @@ import {
   MailIcon,
   Spinner,
 } from "~/shared/icons/icons";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+// import * as Yup from 'yup';
+// import { useFormik } from 'formik';
 
-export default function LoginPage() {
+// const initialData: LoginData = {
+//   email: '',
+//   password: '',
+// };
+
+// const formDataValidationSchema = Yup.object().shape({
+//   email: Yup.string().email().required('Email is required'),
+//   password: Yup.string().required('Password is required'),
+// });
+
+
+const LoginPage = () => {
   const router = useRouter();
+  const { toast } = useToast();
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,24 +51,29 @@ export default function LoginPage() {
       setLoginError("");
       const values: LoginData = { email: email, password: password };
       setIsSubmitting(true);
-
-      console.log("values: ", values);
+        console.log("values: ", values);
+      
       const result = await signIn("credentials", {
-        ...values,
-        redirect: false,
-      });
-
-      console.log("result: ", result);
-
+          ...values,
+          redirect: false,
+          callbackUrl: "/"
+        });
+        console.log("result: ", result);
       if (result && result.ok) {
+        console.log("result: ", result);
         setLoginError("");
         // dispatch(showSuccessSnackbar(`Welcome`));
-        // await router.push('/verificationCheck');
-        console.log("result: ", result);
+        await router.push('/app');
+        toast({
+          title: "Scheduled: Catch up ",
+          description: "Friday, February 10, 2023 at 5:57 PM",
+          action: (
+            <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
+          ),
+        })
         setIsSubmitting(false);
       } else {
         setIsSubmitting(false);
-        console.log("result: ", result);
         setLoginError("Invalid email or password"); // Set the login error message
       }
     } catch (error: unknown) {
@@ -149,3 +169,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+export default LoginPage;

@@ -135,7 +135,6 @@ export const Spinner = ({}: IconSvgProps) => (
     className="h-5 w-5 animate-spin text-current"
     fill="none"
     viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
   >
     <circle
       className="opacity-25"
@@ -152,6 +151,27 @@ export const Spinner = ({}: IconSvgProps) => (
     />
   </svg>
 );
+
+export const PersonIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 18 20"
+      width={size || width}
+      {...props}
+    >
+      <path
+        d="M12.517 12.834v1.9a1.27 1.27 0 0 1-1.267 1.267h-9.5a1.27 1.27 0 0 1-1.267-1.267v-1.9A3.176 3.176 0 0 1 3.65 9.667h5.7a3.176 3.176 0 0 1 3.167 3.167zM3.264 5.48A3.236 3.236 0 1 1 6.5 8.717a3.236 3.236 0 0 1-3.236-3.236z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
 
 export const EyeSlashFilledIcon: React.FC<IconSvgProps> = (props) => {
   return (
