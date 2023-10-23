@@ -57,9 +57,9 @@ const NavBar = () => {
     }
   };
 
-  const handleLogoClick = async () => {
-    await router.push("/");
-  };
+  // const handleLogoClick = async () => {
+  //   await router.push("/");
+  // };
 
   const searchInput = (
     <Input

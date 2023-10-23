@@ -95,6 +95,7 @@ const SignUpPage = () => {
           },
           onError: (e) => {
             setIsSubmitting(false);
+            console.error(e);
             // setSignUpError(e.message);
           },
         });
