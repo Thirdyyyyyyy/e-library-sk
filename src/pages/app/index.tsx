@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 const App: NextPage = () => {
   const session = useSession(); // Destructure data and status from useSession()
+  console.log('inside app session', session);
 
   const router = useRouter();
 
